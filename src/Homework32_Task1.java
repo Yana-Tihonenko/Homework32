@@ -43,6 +43,13 @@ public class Homework32_Task1 {
 
     public static ArrayList<String> searchByDefinition(ArrayList<String> keyWords, HashMap<String, String> dictionaryDevelop) {
         ArrayList<String> result = new ArrayList<>();
+        if (keyWords.isEmpty()) {
+            return result;
+        }
+        if (dictionaryDevelop.isEmpty()){
+            result.add("Not found");
+            return result;
+        }
         for (String elementArray : keyWords) {
             result.add(dictionaryDevelop.getOrDefault(elementArray, "Not found"));
         }
