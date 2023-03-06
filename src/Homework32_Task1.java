@@ -46,7 +46,7 @@ public class Homework32_Task1 {
         if (keyWords.isEmpty()) {
             return result;
         }
-        if (dictionaryDevelop.isEmpty()){
+        if (dictionaryDevelop.isEmpty()) {
             result.add("Not found");
             return result;
         }
@@ -54,6 +54,12 @@ public class Homework32_Task1 {
             result.add(dictionaryDevelop.getOrDefault(elementArray, "Not found"));
         }
         return result;
+    }
+
+    public static void printArraylist(ArrayList<String> arrayList) {
+        for (String print : arrayList) {
+            System.out.println(print);
+        }
     }
 
 }
