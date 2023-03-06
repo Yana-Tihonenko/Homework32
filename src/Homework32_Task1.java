@@ -62,4 +62,13 @@ public class Homework32_Task1 {
         }
     }
 
+    public static ArrayList<String> processingDataFromClients(BufferedReader br, int n) {
+        ArrayList<String> result = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            String inputWord = br.readLine();
+            result.add(inputWord);
+        }
+        return result;
+    }
+
 }
