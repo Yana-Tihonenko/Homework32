@@ -1,3 +1,8 @@
+import javax.imageio.IIOException;
+import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
+
 public class Homework32_Task1 {
     public static void main(String[] args) {
         //Напишите программу создания небольшого словаря сленговых программерских выражений,
@@ -15,4 +20,25 @@ public class Homework32_Task1 {
         //Если слова в словаре нет, программа должна вывести "Не найдено", без кавычек.
 
     }
+
+    public static Map<String, String> createDictionaryDevelop(File inputFile) {
+        Map<String, String> resultMap = new HashMap<>();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(inputFile));
+            int n = Integer.parseInt(br.readLine());
+            for (int i = 0; i < n; i++) {
+                String line = br.readLine();
+                int delimiter = line.indexOf(':');
+                resultMap.put(line.substring(0, delimiter), line.substring(delimiter + 2));
+            }
+            br.close();
+        } catch (NumberFormatException | FileNotFoundException | IndexOutOfBoundsException e) {
+            System.err.println(e.getMessage());
+            return resultMap;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return resultMap;
+    }
+
 }
