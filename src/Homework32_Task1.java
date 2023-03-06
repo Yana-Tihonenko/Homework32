@@ -1,5 +1,5 @@
-import javax.imageio.IIOException;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,6 +39,14 @@ public class Homework32_Task1 {
             throw new RuntimeException(e);
         }
         return resultMap;
+    }
+
+    public static ArrayList<String> searchByDefinition(ArrayList<String> keyWords, HashMap<String, String> dictionaryDevelop) {
+        ArrayList<String> result = new ArrayList<>();
+        for (String elementArray : keyWords) {
+            result.add(dictionaryDevelop.getOrDefault(elementArray, "Not found"));
+        }
+        return result;
     }
 
 }
