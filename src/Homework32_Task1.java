@@ -18,10 +18,16 @@ public class Homework32_Task1 {
         //Для каждого слова, независимо от регистра символов, если оно присутствует в словаре,
         // необходимо вывести на экран его определение.
         //Если слова в словаре нет, программа должна вывести "Не найдено", без кавычек.
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         File inputFile = new File("resouse/dict.txt");
         HashMap<String, String> dictionaryDevelop = createDictionaryDevelop(inputFile);
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int countWordFormClient = Integer.parseInt(br.readLine());
+        int countWordFormClient = 0;
+        try {
+            countWordFormClient = Integer.parseInt(br.readLine());
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+
         ArrayList<String> dataFromClients = processingDataFromClients(br, countWordFormClient);
         ArrayList<String> resultSearch = searchByDefinition(dataFromClients, dictionaryDevelop);
         printArraylist(resultSearch);
