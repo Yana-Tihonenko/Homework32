@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
+
 
 public class Homework32_Task1 {
     public static void main(String[] args) {
@@ -27,12 +27,9 @@ public class Homework32_Task1 {
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
-
         ArrayList<String> dataFromClients = processingDataFromClients(br, countWordFormClient);
         ArrayList<String> resultSearch = searchByDefinition(dataFromClients, dictionaryDevelop);
         printArraylist(resultSearch);
-
-
     }
 
     public static HashMap<String, String> createDictionaryDevelop(File inputFile) {
@@ -41,7 +38,7 @@ public class Homework32_Task1 {
             BufferedReader br = new BufferedReader(new FileReader(inputFile));
             int n = Integer.parseInt(br.readLine());
             for (int i = 0; i < n; i++) {
-                String line = br.readLine();
+                String line = br.readLine().toLowerCase();
                 int delimiter = line.indexOf(':');
                 resultMap.put(line.substring(0, delimiter), line.substring(delimiter + 2));
             }
@@ -80,7 +77,7 @@ public class Homework32_Task1 {
         ArrayList<String> result = new ArrayList<>();
         try {
             for (int i = 0; i < n; i++) {
-                String inputWord = br.readLine();
+                String inputWord = br.readLine().toLowerCase();
                 result.add(inputWord);
             }
         } catch (IOException e) {
