@@ -1,0 +1,5 @@
+nya: read: ОK
+helloworld.exe: write: Access denied
+nya: execute: Access denied
+pinglog: read: ОK
+pinglog: write: ОK
