@@ -1,6 +1,5 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import javax.imageio.IIOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -29,31 +28,36 @@ public class Homework32_Task2 {
 
     public static HashMap<String, ArrayList<String>> createPermissionFromFile(File inputFile) {
         HashMap<String, ArrayList<String>> result = new HashMap<>();
-        BufferedReader br = new BufferedReader(new FileReader(inputFile));
-        int n = Integer.parseInt(br.readLine());
-        for (int i = 0; i < n; i++) {
-            ArrayList<String> permission = new ArrayList<>();
-            String nameFile;
-            String line = br.readLine().trim();
-            int delimiter = line.indexOf(' ');
-            if (delimiter == -1) {
-                nameFile = line;
-            } else {
-                nameFile = line.substring(0, delimiter);
-            }
-            int delimiterNext = delimiter;
-            while (delimiterNext > 0) {
-                delimiterNext = line.indexOf(' ', delimiter + 1);
-                if (delimiterNext == -1) {
-                    permission.add(line.substring(delimiter));
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(inputFile));
+            int n = Integer.parseInt(br.readLine());
+            for (int i = 0; i < n; i++) {
+                ArrayList<String> permission = new ArrayList<>();
+                String nameFile;
+                String line = br.readLine().trim();
+                int delimiter = line.indexOf(' ');
+                if (delimiter == -1) {
+                    nameFile = line;
                 } else {
-                    permission.add(line.substring(delimiter, delimiterNext));
+                    nameFile = line.substring(0, delimiter);
                 }
-                delimiter = delimiterNext;
+                int delimiterNext = delimiter;
+                while (delimiterNext > 0) {
+                    delimiterNext = line.indexOf(' ', delimiter + 1);
+                    if (delimiterNext == -1) {
+                        permission.add(line.substring(delimiter));
+                    } else {
+                        permission.add(line.substring(delimiter, delimiterNext));
+                    }
+                    delimiter = delimiterNext;
+                }
+                result.put(nameFile, permission);
             }
-            result.put(nameFile, permission);
+        } catch (IIOException e) {
+            System.err.println(e.getMessage());
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
         }
-
         return result;
     }
 
