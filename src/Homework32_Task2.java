@@ -1,5 +1,4 @@
 import javax.imageio.IIOException;
-import javax.xml.stream.FactoryConfigurationError;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,7 +34,7 @@ public class Homework32_Task2 {
             HashMap<String, String> mapingPermission = mapingPermission();
             int n = Integer.parseInt(brOperationFile.readLine());
             for (int i = 0; i < n; i++) {
-                HashMap parsingLineFromOperationFile = parsingLine(brOperationFile.readLine());
+                HashMap <String,String> parsingLineFromOperationFile = parsingLine(brOperationFile.readLine());
                 String operationFromOperationFile = mapingPermission.get(parsingLineFromOperationFile.keySet());
                 ArrayList<String> operationFromPermissionFile = permissionFromFile.get(parsingLineFromOperationFile.values());
                 if (operationFromPermissionFile.contains(operationFromOperationFile)) {
