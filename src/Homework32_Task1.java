@@ -19,7 +19,7 @@ public class Homework32_Task1 {
         // необходимо вывести на экран его определение.
         //Если слова в словаре нет, программа должна вывести "Не найдено", без кавычек.
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        File inputFile = new File("resouse/dict.txt");
+        File inputFile = new File("resourse/dict.txt");
         HashMap<String, String> dictionaryDevelop = createDictionaryDevelop(inputFile);
         int countWordFormClient = 0;
         try {
