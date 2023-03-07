@@ -27,28 +27,27 @@ public class Homework32_Task2 {
 
         File files = new File("resourse/file.txt");
         File operations = new File("resourse/operations.txt");
+        String resultLine;
         try {
             FileWriter resultFile = new FileWriter("resourse/result.txt");
             BufferedReader brOperationFile = new BufferedReader(new FileReader(operations));
             HashMap<String, ArrayList<String>> permissionFromFile = createPermissionFromFile(files);
-            HashMap<String, String> mapingPermission = new HashMap<>();
+            HashMap<String, String> mapingPermission = mapingPermission();
             int n = Integer.parseInt(brOperationFile.readLine());
             for (int i = 0; i < n; i++) {
                 HashMap parsingLineFromOperationFile = parsingLine(brOperationFile.readLine());
                 String operationFromOperationFile = mapingPermission.get(parsingLineFromOperationFile.keySet());
                 ArrayList<String> operationFromPermissionFile = permissionFromFile.get(parsingLineFromOperationFile.values());
                 if (operationFromPermissionFile.contains(operationFromOperationFile)) {
-                    String resultLine = parsingLineFromOperationFile.keySet() + ": " + parsingLineFromOperationFile.values() + ": OK";
+                     resultLine = parsingLineFromOperationFile.keySet() + ": " + parsingLineFromOperationFile.values() + ": OK";
                 } else {
-                    String resultLine = parsingLineFromOperationFile.keySet() + ": " + parsingLineFromOperationFile.values() + ":  Access denied";
+                     resultLine = parsingLineFromOperationFile.keySet() + ": " + parsingLineFromOperationFile.values() + ":  Access denied";
                 }
-                resultFile.write(resultFile + "\n");
+                resultFile.write(resultLine + "\n");
             }
             resultFile.close();
         } catch (IIOException e) {
             System.err.println(e.getMessage());
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -83,8 +82,6 @@ public class Homework32_Task2 {
                 }
                 result.put(nameFile, permission);
             }
-        } catch (IIOException e) {
-            System.err.println(e.getMessage());
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
