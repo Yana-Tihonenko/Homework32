@@ -34,15 +34,15 @@ public class Homework32_Task2 {
             HashMap<String, String> mapingPermission = mapingPermission();
             int n = Integer.parseInt(brOperationFile.readLine());
             for (int i = 0; i < n; i++) {
-                String line= brOperationFile.readLine();
+                String line = brOperationFile.readLine();
                 String nameFileFromOperationFile = getNameFileFromOperationFile(line).toLowerCase();
                 String operationFromOperationFile = getNameOperationFromOperationFile(line);
                 String operationFromMapping = mapingPermission.get(operationFromOperationFile).toUpperCase();
                 ArrayList<String> operationFromPermissionFile = permissionFromFile.get(nameFileFromOperationFile);
                 if (operationFromPermissionFile.contains(operationFromMapping)) {
-                     resultLine = nameFileFromOperationFile+ ": "+ operationFromOperationFile+ ": ОK";
+                    resultLine = nameFileFromOperationFile + ": " + operationFromOperationFile + ": ОK";
                 } else {
-                     resultLine = nameFileFromOperationFile+ ": "+ operationFromOperationFile+ ": Access denied";
+                    resultLine = nameFileFromOperationFile + ": " + operationFromOperationFile + ": Access denied";
                 }
                 resultFile.write(resultLine + "\n");
             }
@@ -98,16 +98,28 @@ public class Homework32_Task2 {
     }
 
     public static String getNameFileFromOperationFile(String line) {
-        int delimiter = line.indexOf(' ');
-        String nameFile = line.substring(delimiter + 1);
-
+        String nameFile = "";
+        if (line.isEmpty()) {
+            System.err.println("Line is empty");
+            return nameFile;
+        } else {
+            int delimiter = line.indexOf(' ');
+            nameFile = line.substring(delimiter + 1);
+        }
         return nameFile;
+
     }
 
     public static String getNameOperationFromOperationFile(String line) {
-        int delimiter = line.indexOf(' ');
-        String operation = line.substring(0, delimiter);
-        return operation;
+        String nameOperation = "";
+        if (line.isEmpty()) {
+            System.err.println("Line is empty");
+            return nameOperation;
+        } else {
+            int delimiter = line.indexOf(' ');
+            nameOperation = line.substring(0, delimiter);
+        }
+        return nameOperation;
     }
 
 
