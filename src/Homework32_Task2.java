@@ -1,4 +1,5 @@
 import javax.imageio.IIOException;
+import javax.xml.stream.FactoryConfigurationError;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,6 +24,27 @@ public class Homework32_Task2 {
     // Файл: Операция: OK, если над файлом выполняется допустимая операция,
     // или же Файл: Операция: Access denied, если операция недопустима.
     public static void main(String[] args) {
+
+        File files = new File("resourse/file.txt");
+        File operations = new File("resourse/operations.txt");
+        FileWriter resultFile = new FileWriter("resourse/result.txt");
+        BufferedReader brOperationFile = new BufferedReader(new FileReader(operations));
+        HashMap<String, ArrayList<String>> permissionFromFile = createPermissionFromFile(files);
+        HashMap<String, String> mapingPermission = new HashMap<>();
+        int n = Integer.parseInt(brOperationFile.readLine());
+        for (int i = 0; i < n; i++) {
+            HashMap parsingLineFromOperationFile = parsingLine(brOperationFile.readLine());
+            String operationFromOperationFile = mapingPermission.get(parsingLineFromOperationFile.keySet());
+            ArrayList<String> operationFromPermissionFile = permissionFromFile.get(parsingLineFromOperationFile.values());
+            if (operationFromPermissionFile.contains(operationFromOperationFile)) {
+                String resultLine = parsingLineFromOperationFile.keySet() + ": " + parsingLineFromOperationFile.values() + ": OK";
+            } else {
+                String resultLine = parsingLineFromOperationFile.keySet() + ": " + parsingLineFromOperationFile.values() + ":  Access denied";
+            }
+            resultFile.write(resultFile + "\n");
+        }
+        resultFile.close();
+
 
     }
 
@@ -68,4 +90,15 @@ public class Homework32_Task2 {
         result.put("execute", "x");
         return result;
     }
+
+    public static HashMap<String, String> parsingLine(String line) {
+        HashMap<String, String> result = new HashMap<>();
+        int delimiter = line.indexOf(' ');
+        String operation = line.substring(0, delimiter);
+        String nameFile = line.substring(delimiter + 1);
+        result.put(operation, nameFile);
+        return result;
+    }
+
+
 }
