@@ -40,9 +40,9 @@ public class Homework32_Task2 {
                 String operationFromMapping = mapingPermission.get(operationFromOperationFile).toUpperCase();
                 ArrayList<String> operationFromPermissionFile = permissionFromFile.get(nameFileFromOperationFile);
                 if (operationFromPermissionFile.contains(operationFromMapping)) {
-                    resultLine = nameFileFromOperationFile + ": " + operationFromOperationFile + ": ОK";
+                    resultLine = String.format("%s: %s: OK",nameFileFromOperationFile, operationFromOperationFile);
                 } else {
-                    resultLine = nameFileFromOperationFile + ": " + operationFromOperationFile + ": Access denied";
+                    resultLine = String.format("%s: %s: Access denied",nameFileFromOperationFile,operationFromOperationFile);
                 }
                 resultFile.write(resultLine + "\n");
             }
@@ -75,9 +75,9 @@ public class Homework32_Task2 {
                 while (delimiterNext > 0) {
                     delimiterNext = line.indexOf(' ', delimiter + 1);
                     if (delimiterNext == -1) {
-                        permission.add(line.substring(delimiter+1));
+                        permission.add(line.substring(delimiter + 1));
                     } else {
-                        permission.add(line.substring(delimiter+1, delimiterNext));
+                        permission.add(line.substring(delimiter + 1, delimiterNext));
                     }
                     delimiter = delimiterNext;
                 }
