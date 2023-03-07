@@ -34,13 +34,15 @@ public class Homework32_Task2 {
             HashMap<String, String> mapingPermission = mapingPermission();
             int n = Integer.parseInt(brOperationFile.readLine());
             for (int i = 0; i < n; i++) {
-                HashMap<String, String> parsingLineFromOperationFile = parsingLine(brOperationFile.readLine());
-                String operationFromOperationFile = mapingPermission.get(parsingLineFromOperationFile.keySet());
-                ArrayList<String> operationFromPermissionFile = permissionFromFile.get(parsingLineFromOperationFile.get());
-                if (operationFromPermissionFile.contains(operationFromOperationFile)) {
-                    resultLine = parsingLineFromOperationFile.keySet() + ": " + parsingLineFromOperationFile.values() + ": OK";
+                String line= brOperationFile.readLine();
+                String nameFileFromOperationFile = getNameFileFromOperationFile(line).toLowerCase();
+                String operationFromOperationFile = getNameOperationFromOperationFile(line);
+                String operationFromMapping = mapingPermission.get(operationFromOperationFile).toUpperCase();
+                ArrayList<String> operationFromPermissionFile = permissionFromFile.get(nameFileFromOperationFile);
+                if (operationFromPermissionFile.contains(operationFromMapping)) {
+                     resultLine = nameFileFromOperationFile+ ": "+ operationFromOperationFile+ ": ОK";
                 } else {
-                    resultLine = parsingLineFromOperationFile.keySet() + ": " + parsingLineFromOperationFile.values() + ":  Access denied";
+                     resultLine = nameFileFromOperationFile+ ": "+ operationFromOperationFile+ ": Access denied";
                 }
                 resultFile.write(resultLine + "\n");
             }
