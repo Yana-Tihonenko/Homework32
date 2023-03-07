@@ -61,4 +61,11 @@ public class Homework32_Task2 {
         return result;
     }
 
+    public static HashMap<String, String> mapingPermission() {
+        HashMap<String, String> result = new HashMap<>();
+        result.put("read", "r");
+        result.put("write", "w");
+        result.put("execute", "x");
+        return result;
+    }
 }
