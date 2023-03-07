@@ -75,9 +75,9 @@ public class Homework32_Task2 {
                 while (delimiterNext > 0) {
                     delimiterNext = line.indexOf(' ', delimiter + 1);
                     if (delimiterNext == -1) {
-                        permission.add(line.substring(delimiter));
+                        permission.add(line.substring(delimiter+1));
                     } else {
-                        permission.add(line.substring(delimiter, delimiterNext));
+                        permission.add(line.substring(delimiter+1, delimiterNext));
                     }
                     delimiter = delimiterNext;
                 }
