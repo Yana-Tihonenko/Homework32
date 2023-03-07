@@ -26,31 +26,35 @@ public class Homework32_Task2 {
 
         File files = new File("resourse/file.txt");
         File operations = new File("resourse/operations.txt");
-        String resultLine;
-        try {
-            FileWriter resultFile = new FileWriter("resourse/result.txt");
-            BufferedReader brOperationFile = new BufferedReader(new FileReader(operations));
-            HashMap<String, ArrayList<String>> permissionFromFile = createPermissionFromFile(files);
-            HashMap<String, String> mapingPermission = mapingPermission();
-            int n = Integer.parseInt(brOperationFile.readLine());
-            for (int i = 0; i < n; i++) {
-                String line = brOperationFile.readLine();
-                String nameFileFromOperationFile = getNameFileFromOperationFile(line).toLowerCase();
-                String operationFromOperationFile = getNameOperationFromOperationFile(line);
-                String operationFromMapping = mapingPermission.get(operationFromOperationFile).toUpperCase();
-                ArrayList<String> operationFromPermissionFile = permissionFromFile.get(nameFileFromOperationFile);
-                if (operationFromPermissionFile.contains(operationFromMapping)) {
-                    resultLine = String.format("%s: %s: OK", nameFileFromOperationFile, operationFromOperationFile);
-                } else {
-                    resultLine = String.format("%s: %s: Access denied", nameFileFromOperationFile, operationFromOperationFile);
+        if (files.length() != 0 || operations.length() != 0) {
+            String resultLine;
+            try {
+                FileWriter resultFile = new FileWriter("resourse/result.txt");
+                BufferedReader brOperationFile = new BufferedReader(new FileReader(operations));
+                HashMap<String, ArrayList<String>> permissionFromFile = createPermissionFromFile(files);
+                HashMap<String, String> mapingPermission = mapingPermission();
+                int n = Integer.parseInt(brOperationFile.readLine());
+                for (int i = 0; i < n; i++) {
+                    String line = brOperationFile.readLine();
+                    if (line.length() > 0) {
+                        String nameFileFromOperationFile = getNameFileFromOperationFile(line).toLowerCase();
+                        String operationFromOperationFile = getNameOperationFromOperationFile(line);
+                        String operationFromMapping = mapingPermission.get(operationFromOperationFile).toUpperCase();
+                        ArrayList<String> operationFromPermissionFile = permissionFromFile.get(nameFileFromOperationFile);
+                        if (operationFromPermissionFile.contains(operationFromMapping)) {
+                            resultLine = String.format("%s: %s: Ok", nameFileFromOperationFile, operationFromOperationFile);
+                        } else {
+                            resultLine = String.format("%s: %s: Access denied", nameFileFromOperationFile, operationFromOperationFile);
+                        }
+                        resultFile.write(resultLine + "\n");
+                    }
                 }
-                resultFile.write(resultLine + "\n");
+                resultFile.close();
+            } catch (IIOException e) {
+                System.err.println(e.getMessage());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
-            resultFile.close();
-        } catch (IIOException e) {
-            System.err.println(e.getMessage());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
 
 
