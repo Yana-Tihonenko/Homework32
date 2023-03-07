@@ -1,3 +1,9 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class Homework32_Task2 {
     //В файловую систему одного суперкомпьютера проник вирус,
     // который сломал контроль за правами доступа к файлам. Для каждого файла известно,
@@ -17,4 +23,38 @@ public class Homework32_Task2 {
     //Ваша программа для каждого запроса должна будет выводить
     // Файл: Операция: OK, если над файлом выполняется допустимая операция,
     // или же Файл: Операция: Access denied, если операция недопустима.
+    public static void main(String[] args) {
+
+    }
+
+    public static HashMap<String, ArrayList<String>> createPermissionFromFile(File inputFile) {
+        HashMap<String, ArrayList<String>> result = new HashMap<>();
+        BufferedReader br = new BufferedReader(new FileReader(inputFile));
+        int n = Integer.parseInt(br.readLine());
+        for (int i = 0; i < n; i++) {
+            ArrayList<String> permission = new ArrayList<>();
+            String nameFile;
+            String line = br.readLine().trim();
+            int delimiter = line.indexOf(' ');
+            if (delimiter == -1) {
+                nameFile = line;
+            } else {
+                nameFile = line.substring(0, delimiter);
+            }
+            int delimiterNext = delimiter;
+            while (delimiterNext > 0) {
+                delimiterNext = line.indexOf(' ', delimiter + 1);
+                if (delimiterNext == -1) {
+                    permission.add(line.substring(delimiter));
+                } else {
+                    permission.add(line.substring(delimiter, delimiterNext));
+                }
+                delimiter = delimiterNext;
+            }
+            result.put(nameFile, permission);
+        }
+
+        return result;
+    }
+
 }
