@@ -34,13 +34,13 @@ public class Homework32_Task2 {
             HashMap<String, String> mapingPermission = mapingPermission();
             int n = Integer.parseInt(brOperationFile.readLine());
             for (int i = 0; i < n; i++) {
-                HashMap <String,String> parsingLineFromOperationFile = parsingLine(brOperationFile.readLine());
+                HashMap<String, String> parsingLineFromOperationFile = parsingLine(brOperationFile.readLine());
                 String operationFromOperationFile = mapingPermission.get(parsingLineFromOperationFile.keySet());
-                ArrayList<String> operationFromPermissionFile = permissionFromFile.get(parsingLineFromOperationFile.values());
+                ArrayList<String> operationFromPermissionFile = permissionFromFile.get(parsingLineFromOperationFile.get());
                 if (operationFromPermissionFile.contains(operationFromOperationFile)) {
-                     resultLine = parsingLineFromOperationFile.keySet() + ": " + parsingLineFromOperationFile.values() + ": OK";
+                    resultLine = parsingLineFromOperationFile.keySet() + ": " + parsingLineFromOperationFile.values() + ": OK";
                 } else {
-                     resultLine = parsingLineFromOperationFile.keySet() + ": " + parsingLineFromOperationFile.values() + ":  Access denied";
+                    resultLine = parsingLineFromOperationFile.keySet() + ": " + parsingLineFromOperationFile.values() + ":  Access denied";
                 }
                 resultFile.write(resultLine + "\n");
             }
@@ -95,13 +95,17 @@ public class Homework32_Task2 {
         return result;
     }
 
-    public static HashMap<String, String> parsingLine(String line) {
-        HashMap<String, String> result = new HashMap<>();
+    public static String getNameFileFromOperationFile(String line) {
+        int delimiter = line.indexOf(' ');
+        String nameFile = line.substring(delimiter + 1);
+
+        return nameFile;
+    }
+
+    public static String getNameOperationFromOperationFile(String line) {
         int delimiter = line.indexOf(' ');
         String operation = line.substring(0, delimiter);
-        String nameFile = line.substring(delimiter + 1);
-        result.put(operation, nameFile);
-        return result;
+        return operation;
     }
 
 
